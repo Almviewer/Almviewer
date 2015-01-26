@@ -1,0 +1,181 @@
+<head>
+	<title>Almviewer</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	<link rel="stylesheet" href="client/css/bootstrap.css" type="text/css">
+	<link rel="stylesheet" href="Almviewer.css" type="text/css">
+	<link rel="stylesheet" href="client/css/rateit.css" type="text/css">
+</head>
+
+<body>
+	{{>navigation}}
+	<script src="client/js/jquery-1.11.1.min.js"></script>
+	<script src="client/js/bootstrap.js"></script>
+	<script src="client/js/zusatz.js"></script>
+	<script src="client/jquery.rateit.min.js"></script>
+</body>
+
+<template name="navigation">
+	<div class="navbar navbar-inverse navbar-static-top navbar-bg">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="Startseite.html" class="navbar-brand"><img style="max-width:120px;" alt="Almviewer" src="header_logo2.png"></a>
+				<button class="navbar-toggle" data-toggle="collapse" data-target = ".navHeaderCollapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse navHeaderCollapse">
+				{{#if currentUser}}
+				{{>nav_loggedin}}
+				{{else}}
+				{{>nav_loggedout}}
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="nav_loggedout">
+	<ul class="nav navbar-nav navbar-right">
+		<li class="active"><a href="/">Startseite</a></li>
+		<li><a href="/routen">Routen</a></li>
+		<li><a href="/registration">Registrierung</a></li>
+		<li><a href="/impressum">Impressum</a></li>
+	</ul>
+</template>
+
+<template name="nav_loggedin">
+	<ul class="nav navbar-nav navbar-right">
+		<li class="active"><a href="/">Startseite</a></li>
+		<li><a href="/">Logout</a></li>
+		<li>{{>logout}}</li>
+		<li><a href="/vorschlag">Vorschlag</a></li>
+		<li><a href="/impressum">Impressum</a></li>
+	</ul>
+</template>
+
+<template name="logout">
+  <a href="#" id="logoutButton">Logout</a>
+</template>
+
+<template name="start_loggedin">
+	<div class="container-fluid">
+		<div class="jumbotron jumbotron-bg">
+			<center>
+				<h1>Startseite</h1>
+				<p>Hier werden Informationen zur Website angezeigt</p>
+			</center>
+		</div>
+	</div>
+</template>
+
+<template name="startseite">
+	<div class="hintergrund">
+		<div class="container-fluid">
+			<div class="jumbotron jumbotron-bg">
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4">
+						<center>
+							<h1>Startseite</h1>
+							<p>Hier werden Informationen zur Website angezeigt</p>
+							<p>{{>rating}}</p>
+						</center>
+					</div>
+					<div class="col-md-3 pull-right login-design">
+						{{>login}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="rating">
+	<div class="rateit"></div>
+</template>
+
+<template name="login">
+	<form id="loginForm" method="POST" action="/login/" novalidate="novalidate">
+		<div class="form-group">
+			<center>
+				<label for="username" class="control-label">Benutzername</label>
+			</center>
+			<input type="text" class="form-control" id="login_email" name="username" value="" required="" title="Bitte geben Sie Ihren Benutzernamen ein" placeholder="Benutzername">
+			<span class="help-block"></span>
+		</div>
+		<div class="form-group">
+			<center>
+				<label for="password" class="control-label">Passwort</label>
+			</center>
+			<input type="password" class="form-control" id="login_password" name="password" value="" required="" title="Bitte geben Sie Ihr Passwort ein">
+			<span class="help-block"></span>
+		</div>
+
+		<button type="submit" id="loginButton" class="btn btn-success btn-block">Login</button>
+		<a href="#" class="btn btn-default btn-block">Passwort vergessen</a>
+		<div class="checkbox">
+			<label><input type="checkbox" name="remember" id="remember"> Angemeldet bleiben</label>
+		</div>
+	</form>
+</template>
+
+<template name="registration">
+	<div class="hintergrund">
+		<div class="container-fluid">
+			<div class="row row-centered">
+				<div class="col-md-3 col-centered reg-bg">
+					<form class="form-horizontal" action='' method="POST">
+						<fieldset>
+							<div id="legend">
+								<legend class="">Registrierung</legend>
+							</div>
+							<div class="control-group">
+								<!-- Username -->
+								<label class="control-label"  for="username">Benutzername</label>
+								<div class="controls">
+									<input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+									<p class="help-block">Benutzername darf Buchstaben und Ziffern enthalten, aber keine Leerzeichen.</p>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<!-- E-mail -->
+								<label class="control-label" for="email">E-Mail</label>
+								<div class="controls">
+									<input type="text" id="email" name="email" placeholder="" class="input-xlarge">
+									<p class="help-block">Ihre gültige E-Mail Adresse</p>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<!-- Password-->
+								<label class="control-label" for="password">Passwort</label>
+								<div class="controls">
+									<input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+									<p class="help-block">Mindestens 4 Zeichen</p>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<!-- Password -->
+								<label class="control-label"  for="password_confirm">Passwort wiederholen</label>
+								<div class="controls">
+									<input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge">
+									<p class="help-block">Passwort wiederholen</p>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<!-- Button -->
+								<div class="controls">
+									<button class="btn btn-success" id="registrierButton">Registrieren</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
