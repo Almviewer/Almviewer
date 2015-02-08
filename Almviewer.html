@@ -48,7 +48,6 @@
 <template name="nav_loggedin">
 	<ul class="nav navbar-nav navbar-right">
 		<li class="active"><a href="/">Startseite</a></li>
-		<li><a href="/">Logout</a></li>
 		<li>{{>logout}}</li>
 		<li><a href="/vorschlag">Vorschlag</a></li>
 		<li><a href="/impressum">Impressum</a></li>
@@ -56,16 +55,30 @@
 </template>
 
 <template name="logout">
-  <a href="#" id="logoutButton">Logout</a>
+	<a href="#" id="logoutButton">Logout</a>
 </template>
 
 <template name="start_loggedin">
-	<div class="container-fluid">
-		<div class="jumbotron jumbotron-bg">
-			<center>
-				<h1>Startseite</h1>
-				<p>Hier werden Informationen zur Website angezeigt</p>
-			</center>
+	<div class="jumbotron jumbotron-bg">
+		<center>
+			<h1>Startseite</h1>
+			<p>Hier werden Informationen zur Website angezeigt</p>
+		</center>
+	</div>
+</template>
+
+<template name="start_loggedout">
+	<div class="jumbotron jumbotron-bg">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<center>
+					<h1>Startseite</h1>
+					<p>Hier werden Informationen zur Website angezeigt</p>
+				</center>
+			</div>
+			<div class="col-md-3 pull-right login-design">
+				{{>login}}
+			</div>
 		</div>
 	</div>
 </template>
@@ -73,26 +86,13 @@
 <template name="startseite">
 	<div class="hintergrund">
 		<div class="container-fluid">
-			<div class="jumbotron jumbotron-bg">
-				<div class="row">
-					<div class="col-md-4 col-md-offset-4">
-						<center>
-							<h1>Startseite</h1>
-							<p>Hier werden Informationen zur Website angezeigt</p>
-							<p>{{>rating}}</p>
-						</center>
-					</div>
-					<div class="col-md-3 pull-right login-design">
-						{{>login}}
-					</div>
-				</div>
-			</div>
+			{{#if currentUser}}
+			{{>start_loggedin}}
+			{{else}}
+			{{>start_loggedout}}
+			{{/if}}
 		</div>
 	</div>
-</template>
-
-<template name="rating">
-	<div class="rateit"></div>
 </template>
 
 <template name="login">
@@ -135,7 +135,6 @@
 								<label class="control-label"  for="username">Benutzername</label>
 								<div class="controls">
 									<input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-									<p class="help-block">Benutzername darf Buchstaben und Ziffern enthalten, aber keine Leerzeichen.</p>
 								</div>
 							</div>
 
@@ -144,7 +143,6 @@
 								<label class="control-label" for="email">E-Mail</label>
 								<div class="controls">
 									<input type="text" id="email" name="email" placeholder="" class="input-xlarge">
-									<p class="help-block">Ihre gültige E-Mail Adresse</p>
 								</div>
 							</div>
 
@@ -153,7 +151,6 @@
 								<label class="control-label" for="password">Passwort</label>
 								<div class="controls">
 									<input type="password" id="password" name="password" placeholder="" class="input-xlarge">
-									<p class="help-block">Mindestens 4 Zeichen</p>
 								</div>
 							</div>
 
@@ -161,8 +158,7 @@
 								<!-- Password -->
 								<label class="control-label"  for="password_confirm">Passwort wiederholen</label>
 								<div class="controls">
-									<input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge">
-									<p class="help-block">Passwort wiederholen</p>
+									<input type="password" id="passwordwdh" name="password_confirm" placeholder="" class="input-xlarge">
 								</div>
 							</div>
 
