@@ -1,6 +1,8 @@
 if (Meteor.isClient) {
 
 	Session.setDefault("counter", 0);
+Meteor.subscribe("userStatus");
+	
 	Router.route('/', function () {
 		this.render('startseite');
 	});
@@ -11,6 +13,12 @@ if (Meteor.isClient) {
 
 	Router.route('/start_loggedin', function () {
 		this.render('start_loggedin');
+	});
+
+	Meteor.startup(function() {
+		reCAPTCHA.config({
+			publickey: '6LeotAETAAAAAB1avIaV30Z_MMQ3UzvuVNpgp2Q2'
+		});
 	});
 
 	RegistrationSchema = new SimpleSchema({
@@ -35,8 +43,22 @@ if (Meteor.isClient) {
 	});
 
 	Template.registration.events = ({
-		'click #registrierButton': function(event, template){
-			event.preventDefault();
+		'submit form': function(e) {
+
+			e.preventDefault();
+
+			var formData = {
+				emailVar: document.getElementById('email').value,
+				passwordVar: document.getElementById('password').value,
+				passwordVarWdh: document.getElementById('passwordwdh').value,
+				usernameVar: document.getElementById('username').value
+			};
+
+			var captchaData = {
+				captcha_challenge_id: Recaptcha.get_challenge(),
+				captcha_solution: Recaptcha.get_response()
+			};
+
 			var emailVar = document.getElementById('email').value;
 			var passwordVar = document.getElementById('password').value;
 			var passwordVarWdh = document.getElementById('passwordwdh').value;
@@ -54,15 +76,24 @@ if (Meteor.isClient) {
 				}
 
 				if (context.isValid()){
-					console.log("Form submitted.");
-					alert('Registriert');
-					Accounts.createUser({
-						username: usernameVar,
-						email: emailVar,
-						password: passwordVar,
+					Meteor.call('formSubmissionMethod', formData, captchaData, function(error, result) {
+						if (error) {
+							console.log('There was an error: ' + error.reason);
+						} else {
+							console.log('Success!');
+							console.log("Form submitted.");
+							alert('Registriert');
+							Accounts.createUser({
+								username: usernameVar,
+								email: emailVar,
+								password: passwordVar,
+							});
+
+							Router.go('/');
+						}
 					});
 
-					Router.go('/');
+					
 				}
 			}
 
@@ -92,7 +123,26 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
-	Meteor.startup(function () {
-    // code to run on server at startup
+	Meteor.startup(function() {
+		reCAPTCHA.config({
+			privatekey: '6LeotAETAAAAACYBw6fe85bXmUi2OldM6NhS8inU'
+		});
+	});
+
+	Meteor.methods({
+		formSubmissionMethod: function(formData, captchaData) {
+
+			var verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(this.connection.clientAddress, captchaData);
+
+			if (!verifyCaptchaResponse.success) {
+				console.log('reCAPTCHA check failed!', verifyCaptchaResponse);
+				throw new Meteor.Error(422, 'reCAPTCHA Failed: ' + verifyCaptchaResponse.error);
+			} else
+			console.log('reCAPTCHA verification passed!');
+
+        //do stuff with your formData
+
+        return true;
+    }	
 });
 }
