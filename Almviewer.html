@@ -51,6 +51,7 @@
 		<li>{{>logout}}</li>
 		<li><a href="/vorschlag">Vorschlag</a></li>
 		<li><a href="/impressum">Impressum</a></li>
+		<li><a href="/">{{currentUser.username}}</a></li>
 	</ul>
 </template>
 
@@ -124,7 +125,7 @@
 	<div class="hintergrund">
 		<div class="container-fluid">
 			<div class="row row-centered">
-				<div class="col-md-3 col-centered reg-bg">
+				<div class="col-md-5 col-centered reg-bg">
 					<form class="form-horizontal" action='' method="POST">
 						<fieldset>
 							<div id="legend">
@@ -137,7 +138,6 @@
 									<input type="text" id="username" name="username" placeholder="" class="input-xlarge">
 								</div>
 							</div>
-
 							<div class="control-group">
 								<!-- E-mail -->
 								<label class="control-label" for="email">E-Mail</label>
@@ -145,7 +145,6 @@
 									<input type="text" id="email" name="email" placeholder="" class="input-xlarge">
 								</div>
 							</div>
-
 							<div class="control-group">
 								<!-- Password-->
 								<label class="control-label" for="password">Passwort</label>
@@ -153,7 +152,6 @@
 									<input type="password" id="password" name="password" placeholder="" class="input-xlarge">
 								</div>
 							</div>
-
 							<div class="control-group">
 								<!-- Password -->
 								<label class="control-label"  for="password_confirm">Passwort wiederholen</label>
@@ -161,11 +159,13 @@
 									<input type="password" id="passwordwdh" name="password_confirm" placeholder="" class="input-xlarge">
 								</div>
 							</div>
-
+							
+								{{> reCAPTCHA}}
+							
 							<div class="control-group">
 								<!-- Button -->
 								<div class="controls">
-									<button class="btn btn-success" id="registrierButton">Registrieren</button>
+									<button class="btn btn-success" type="submit" id="registrierButton">Registrieren</button>
 								</div>
 							</div>
 						</fieldset>
