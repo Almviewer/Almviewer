@@ -1,0 +1,8 @@
+Packete die installiert werden müssen:
+
+accounts-password
+iron:router
+dandv:jquery-rateit
+aldeed:simple-schema
+aldeed:collection2
+altapp:recaptcha
