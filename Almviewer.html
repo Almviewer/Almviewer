@@ -51,6 +51,7 @@
 		<li>{{>logout}}</li>
 		<li><a href="/vorschlag">Vorschlag</a></li>
 		<li><a href="/impressum">Impressum</a></li>
+		<li><a href="/profil">{{currentUser.username}}</a></li>
 	</ul>
 </template>
 
@@ -84,7 +85,6 @@
 </template>
 
 <template name="startseite">
-	<div class="hintergrund">
 		<div class="container-fluid">
 			{{#if currentUser}}
 			{{>start_loggedin}}
@@ -92,16 +92,15 @@
 			{{>start_loggedout}}
 			{{/if}}
 		</div>
-	</div>
 </template>
 
 <template name="login">
 	<form id="loginForm" method="POST" action="/login/" novalidate="novalidate">
 		<div class="form-group">
 			<center>
-				<label for="username" class="control-label">Benutzername</label>
+				<label for="login_user" class="control-label">Benutzername</label>
 			</center>
-			<input type="text" class="form-control" id="login_email" name="username" value="" required="" title="Bitte geben Sie Ihren Benutzernamen ein" placeholder="Benutzername">
+			<input type="text" class="form-control" id="login_user" name="username" value="" required="" title="Bitte geben Sie Ihren Benutzernamen ein" placeholder="Benutzername">
 			<span class="help-block"></span>
 		</div>
 		<div class="form-group">
@@ -109,7 +108,6 @@
 				<label for="password" class="control-label">Passwort</label>
 			</center>
 			<input type="password" class="form-control" id="login_password" name="password" value="" required="" title="Bitte geben Sie Ihr Passwort ein">
-			<span class="help-block"></span>
 		</div>
 
 		<button type="submit" id="loginButton" class="btn btn-success btn-block">Login</button>
@@ -121,10 +119,9 @@
 </template>
 
 <template name="registration">
-	<div class="hintergrund">
 		<div class="container-fluid">
 			<div class="row row-centered">
-				<div class="col-md-3 col-centered reg-bg">
+				<div class="col-md-5 col-centered reg-bg">
 					<form class="form-horizontal" action='' method="POST">
 						<fieldset>
 							<div id="legend">
@@ -137,7 +134,6 @@
 									<input type="text" id="username" name="username" placeholder="" class="input-xlarge">
 								</div>
 							</div>
-
 							<div class="control-group">
 								<!-- E-mail -->
 								<label class="control-label" for="email">E-Mail</label>
@@ -145,7 +141,6 @@
 									<input type="text" id="email" name="email" placeholder="" class="input-xlarge">
 								</div>
 							</div>
-
 							<div class="control-group">
 								<!-- Password-->
 								<label class="control-label" for="password">Passwort</label>
@@ -153,7 +148,6 @@
 									<input type="password" id="password" name="password" placeholder="" class="input-xlarge">
 								</div>
 							</div>
-
 							<div class="control-group">
 								<!-- Password -->
 								<label class="control-label"  for="password_confirm">Passwort wiederholen</label>
@@ -161,11 +155,16 @@
 									<input type="password" id="passwordwdh" name="password_confirm" placeholder="" class="input-xlarge">
 								</div>
 							</div>
-
+							<div class="control-group">
+								<input type="checkbox" id="agb" value="agb">AGB's akzeptieren
+							</div>
+							
+							{{> reCAPTCHA}}
+							
 							<div class="control-group">
 								<!-- Button -->
 								<div class="controls">
-									<button class="btn btn-success" id="registrierButton">Registrieren</button>
+									<button class="btn btn-success" type="submit" id="registrierButton">Registrieren</button>
 								</div>
 							</div>
 						</fieldset>
@@ -173,5 +172,48 @@
 				</div>
 			</div>
 		</div>
-	</div>
+</template>
+
+<template name="profil">
+		<div class="container-fluid">
+			<div class="row row-centered">
+				<div class="col-md-5 col-centered profil-bg">
+					<form class="form-horizontal" action='' method="POST">
+						<fieldset>
+							<div id="legend">
+								<legend class="">Profil</legend>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="pro_username">Benutzername</label>
+								<div class="controls">
+									<input type="text" id="pro_username" name="username" placeholder="{{currentUser.username}}" class="input-xlarge">
+									<button class="btn btn-success" type="submit" id="profiluserButton">Aktualisieren</button>
+								</div>
+								
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="pro_email">E-Mail</label>
+								<div class="controls">
+									<input type="text" id="pro_email" name="email" placeholder="{{currentUser.email}}" class="input-xlarge">
+									<button class="btn btn-success" type="submit" id="profilemailButton">Aktualisieren</button>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="pro_password">Passwort</label>
+								<div class="controls">
+									<input type="password" id="pro_password" name="password" class="input-xlarge">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="pro_password">Passwort wiederholen</label>
+								<div class="controls">
+									<input type="password" id="pro_passwordwdh" name="password" class="input-xlarge">
+									<button class="btn btn-success" type="submit" id="profilpassworButton">Aktualisieren</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
 </template>

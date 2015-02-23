@@ -1,8 +1,14 @@
 if (Meteor.isClient) {
 
 	Session.setDefault("counter", 0);
+	Meteor.subscribe("userStatus");
+
 	Router.route('/', function () {
 		this.render('startseite');
+	});
+
+	Router.route('/profil', function () {
+		this.render('profil');
 	});
 
 	Router.route('/registration', function () {
@@ -13,16 +19,22 @@ if (Meteor.isClient) {
 		this.render('start_loggedin');
 	});
 
-	RegistrationSchema = new SimpleSchema({
+	Meteor.startup(function() {
+		reCAPTCHA.config({
+			publickey: '6LeotAETAAAAAB1avIaV30Z_MMQ3UzvuVNpgp2Q2'
+		});
+	});
+
+	UserSchema = new SimpleSchema({
 		username: {
 			type: String,
-			regEx: /^[a-z0-9_-]/i,
+			regEx: /^[A-Za-z0-9_-]/,
 			min: 4,
 			max: 15
 		},
 		password: {
 			type: String,
-			regEx: /^[a-z0-9]/i,
+			regEx: /^[A-Za-z0-9]/,
 			min: 4,
 			max: 18
 		},
@@ -35,48 +47,69 @@ if (Meteor.isClient) {
 	});
 
 	Template.registration.events = ({
-		'click #registrierButton': function(event, template){
-			event.preventDefault();
+		'submit form': function(e) {
+
+			e.preventDefault();
+
+			var formData = {
+				emailVar: document.getElementById('email').value,
+				passwordVar: document.getElementById('password').value,
+				passwordVarWdh: document.getElementById('passwordwdh').value,
+				usernameVar: document.getElementById('username').value
+			};
+
+			var captchaData = {
+				captcha_challenge_id: Recaptcha.get_challenge(),
+				captcha_solution: Recaptcha.get_response()
+			};
+
 			var emailVar = document.getElementById('email').value;
 			var passwordVar = document.getElementById('password').value;
 			var passwordVarWdh = document.getElementById('passwordwdh').value;
 			var usernameVar = document.getElementById('username').value;
+			var agbcheck = document.getElementById('agb').checked;
 
 			if(passwordVar == passwordVarWdh){
 
 				obj = {username: usernameVar, email: emailVar, password: passwordVar};
-				var context = RegistrationSchema.namedContext("myContext");
+				var contextreg = UserSchema.namedContext("myContext");
 
-				context.validate(obj);
+				contextreg.validate(obj);
 
-				if (!context.isValid()) {
+				if (!contextreg.isValid()) {
 					console.log("Falsche Eingabe");
 				}
 
-				if (context.isValid()){
-					console.log("Form submitted.");
-					alert('Registriert');
-					Accounts.createUser({
-						username: usernameVar,
-						email: emailVar,
-						password: passwordVar,
-					});
+				if (contextreg.isValid()){
+					Meteor.call('formSubmissionMethod', formData, captchaData, function(error, result) {
+						if (error) {
+							console.log('There was an error: ' + error.reason);
+						} else {
+							console.log('Success!');
+							console.log("Form submitted.");
+							alert('Registriert');
+							Accounts.createUser({
+								username: usernameVar,
+								email: emailVar,
+								password: passwordVar,
+							});
 
-					Router.go('/');
+							Router.go('/');
+						}
+					});
 				}
 			}
 
 			else{
 				alert('Passwort wurde falsch wiederholt');
 			}
-
 		}
 	});
 
 	Template.login.events = ({
 		'click #loginButton': function(event){
 			event.preventDefault();
-			var usernameVar = document.getElementById('login_email').value;
+			var usernameVar = document.getElementById('login_user').value;
 			var passwordVar = document.getElementById('login_password').value;
 			console.log("Eingeloggt");
 			Meteor.loginWithPassword(usernameVar,passwordVar);
@@ -87,12 +120,72 @@ if (Meteor.isClient) {
 		'click #logoutButton': function(event){
 			event.preventDefault();
 			Meteor.logout();
+			Router.go('/');
 		}
 	});
+
+	Template.profil.events = ({
+		'click #profiluserButton': function(event){
+			event.preventDefault();
+			var pro_usernameVar = document.getElementById('pro_username').value;
+			Meteor.call('updateuserfunction', pro_usernameVar);
+		},
+		'click #profilemailButton': function(event){
+			event.preventDefault();
+			var pro_emailVar = document.getElementById('pro_email').value;
+			Meteor.call('updateemailfunction', pro_emailVar);
+		},
+		'click #profilpasswordButton': function(event){
+			event.preventDefault();
+			var pro_passwordVar = document.getElementById('pro_password').value;
+			var pro_passwordwdhVar = document.getElementById('pro_passwordwdh').value;
+			if(pro_passwordVar==pro_passwordwdhVar){
+				Meteor.call('updatepasswordfunction', pro_passwordVar);
+			}
+		}
+	});
+
 }
 
 if (Meteor.isServer) {
-	Meteor.startup(function () {
-    // code to run on server at startup
+	Meteor.startup(function() {
+		reCAPTCHA.config({
+			privatekey: '6LeotAETAAAAACYBw6fe85bXmUi2OldM6NhS8inU'
+		});
+	});
+
+	Meteor.methods({
+		updateuserfunction: function (username) {
+			Meteor.users.update({_id:Meteor.user()._id}, {$set:{username:username}});
+		}
+	});
+
+	Meteor.methods({
+		updateemailfunction: function (email) {
+			Meteor.users.update({_id:Meteor.user()._id}, {$set:{email:email}});
+		}
+	});
+
+	Meteor.methods({
+		updatepasswordfunction: function (password) {
+			Meteor.users.update({_id:Meteor.user()._id}, {$set:{password:password}});
+		}
+	});
+
+	Meteor.methods({
+		formSubmissionMethod: function(formData, captchaData) {
+
+			var verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(this.connection.clientAddress, captchaData);
+
+			if (!verifyCaptchaResponse.success) {
+				console.log('reCAPTCHA check failed!', verifyCaptchaResponse);
+				throw new Meteor.Error(422, 'reCAPTCHA Failed: ' + verifyCaptchaResponse.error);
+			} else
+			console.log('reCAPTCHA verification passed!');
+
+        //do stuff with your formData
+
+        return true;
+    }	
 });
 }

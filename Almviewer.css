@@ -10,6 +10,13 @@
 	background-image: url("/esche-dunkel_web.jpg");
 }
 
+.profil-bg{
+	background-image: url("/esche-dunkel_web.jpg");
+	color: #fff;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	padding-bottom: 10px; 
+}
+
 .routen-bg{
 	background-image: url("/bg-zettel.png");
 	background-size: 101%;
@@ -21,8 +28,8 @@
 }
 
 .reg-bg{
-background-image: url("/esche-dunkel_web.jpg");
-color: #fff;
+	background-image: url("/esche-dunkel_web.jpg");
+	color: #fff;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
@@ -31,15 +38,15 @@ input{
 }
 
 .row-centered {
-    text-align:center;
+	text-align:center;
 }
 .col-centered {
-    display:inline-block;
-    float:none;
-    /* reset the text-align */
-    text-align:left;
-    /* inline-block space fix */
-    margin-right:-4px;
+	display:inline-block;
+	float:none;
+	/* reset the text-align */
+	text-align:left;
+	/* inline-block space fix */
+	margin-right:-4px;
 }
 
 .nav-cont{
@@ -47,9 +54,9 @@ input{
 	max-width: 400px;
 	min-width: 250px;
 	position: relative;
-  	padding-left: 15px;
-  	padding-right: 15px;
-  	float: left;
+	padding-left: 15px;
+	padding-right: 15px;
+	float: left;
 }
 
 .suchen-feld{
