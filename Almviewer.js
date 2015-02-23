@@ -1,8 +1,13 @@
 if (Meteor.isClient) {
 
 	Session.setDefault("counter", 0);
+<<<<<<< HEAD
 	Meteor.subscribe("userStatus");
 
+=======
+Meteor.subscribe("userStatus");
+	
+>>>>>>> origin/master
 	Router.route('/', function () {
 		this.render('startseite');
 	});
@@ -25,7 +30,11 @@ if (Meteor.isClient) {
 		});
 	});
 
+<<<<<<< HEAD
 	UserSchema = new SimpleSchema({
+=======
+	RegistrationSchema = new SimpleSchema({
+>>>>>>> origin/master
 		username: {
 			type: String,
 			regEx: /^[A-Za-z0-9_-]/,
@@ -80,7 +89,11 @@ if (Meteor.isClient) {
 					console.log("Falsche Eingabe");
 				}
 
+<<<<<<< HEAD
 				if (contextreg.isValid()){
+=======
+				if (context.isValid()){
+>>>>>>> origin/master
 					Meteor.call('formSubmissionMethod', formData, captchaData, function(error, result) {
 						if (error) {
 							console.log('There was an error: ' + error.reason);
@@ -97,6 +110,11 @@ if (Meteor.isClient) {
 							Router.go('/');
 						}
 					});
+<<<<<<< HEAD
+=======
+
+					
+>>>>>>> origin/master
 				}
 			}
 
@@ -155,6 +173,7 @@ if (Meteor.isServer) {
 	});
 
 	Meteor.methods({
+<<<<<<< HEAD
 		updateuserfunction: function (username) {
 			Meteor.users.update({_id:Meteor.user()._id}, {$set:{username:username}});
 		}
@@ -173,6 +192,8 @@ if (Meteor.isServer) {
 	});
 
 	Meteor.methods({
+=======
+>>>>>>> origin/master
 		formSubmissionMethod: function(formData, captchaData) {
 
 			var verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(this.connection.clientAddress, captchaData);
