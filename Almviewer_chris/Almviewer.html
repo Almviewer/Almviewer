@@ -1,0 +1,44 @@
+<head>
+  <title>almviewer</title>
+</head>
+
+<body>
+  {{> routen}}
+  {{> profilinfos}}
+
+</body>
+
+<template name="routen">
+	<div id="routenbox">
+		<input type="text" class ="routeninput" id="routeninput" placeholder="Route"/>
+
+		<div id="routenAusgabe">
+		  {{#each route}}
+		  	<p><a href="#" id="aktRout">{{name}}<!--, id:{{id}}, Schwierigkeitsgrad: {{schwierigkeitsgrad}}: Schwierigkeitsgrad: {{Schwierigkeitsgrad}} Höhenmeter: {{hoehenmeter}}--></a></p>
+		  {{/each}}
+	  	</div>
+	 
+  	</div>
+
+  	<div id="routenInfo">
+
+  	</div>
+
+  	<div id="googleeinbindung">
+
+  	</div>
+
+</template>
+
+<template name="profilinfos">
+
+	<input type="text" class ="" id="emailchange" placeholder="Username"/>
+	<input type="password" class ="" id="oldpassword" placeholder="Altes Passwort"/>
+	<input type="password" class ="" id="newpassword" placeholder="Neues Passwort"/>
+	<input type="password" class ="" id="newpasswordwh" placeholder="Passwort wiederholen"/>
+	<button type="submit" id="submitchanges">Änderungen speichern.</button>
+	<button type="button" id="deleteAcc">Account loeschen.</button>
+
+
+</template>
+
