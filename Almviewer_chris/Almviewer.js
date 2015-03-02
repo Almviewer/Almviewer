@@ -6,9 +6,6 @@ if (Meteor.isClient) {
     return Routen.find({name: { $regex: Session.get('prefix')+".*", $options: 'i' }});
   };
 
- 
-
-
   function routenAusgabe(){
    $(".routeninput").on("change keyup paste click", function(){
     Session.set('prefix', $('.routeninput').val());
@@ -49,23 +46,6 @@ if (Meteor.isClient) {
    //sdjfjsdfksdfksjdf
    //sjdfjksdfsjdfjsdf
    //ijhfsdhfkshdkjfks
-
-
-  Template.profilinfos.events = ({
-    'click #submitchanges': function(event, template){
-      event.preventDefault();
-      var emailVar = document.getElementById('emailchange').value;
-      var oldpw = document.getElementById('oldpassword').value;
-      var newpw = document.getElementById('newpassword').value;
-      var newpwwh = document.getElementById('newpasswordwh').value;
-      console.log("Form submitted.");
-      Accounts.createUser({
-        username: usernameVar,
-        email: emailVar,
-        password: passwordVar
-      });
-    }
-  });
 
 }
 

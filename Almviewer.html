@@ -51,11 +51,7 @@
 		<li>{{>logout}}</li>
 		<li><a href="/vorschlag">Vorschlag</a></li>
 		<li><a href="/impressum">Impressum</a></li>
-<<<<<<< HEAD
 		<li><a href="/profil">{{currentUser.username}}</a></li>
-=======
-		<li><a href="/">{{currentUser.username}}</a></li>
->>>>>>> origin/master
 	</ul>
 </template>
 
@@ -89,13 +85,13 @@
 </template>
 
 <template name="startseite">
-		<div class="container-fluid">
-			{{#if currentUser}}
-			{{>start_loggedin}}
-			{{else}}
-			{{>start_loggedout}}
-			{{/if}}
-		</div>
+	<div class="container-fluid">
+		{{#if currentUser}}
+		{{>start_loggedin}}
+		{{else}}
+		{{>start_loggedout}}
+		{{/if}}
+	</div>
 </template>
 
 <template name="login">
@@ -123,109 +119,215 @@
 </template>
 
 <template name="registration">
-		<div class="container-fluid">
-			<div class="row row-centered">
-				<div class="col-md-5 col-centered reg-bg">
-					<form class="form-horizontal" action='' method="POST">
-						<fieldset>
-							<div id="legend">
-								<legend class="">Registrierung</legend>
+	<div class="container-fluid">
+		<div class="row row-centered">
+			<div class="col-md-5 col-centered reg-bg">
+				<form class="form-horizontal" action='' method="POST">
+					<fieldset>
+						<div id="legend">
+							<legend class="">Registrierung</legend>
+						</div>
+						<div class="control-group">
+							<!-- Username -->
+							<label class="control-label"  for="username">Benutzername</label>
+							<div class="controls">
+								<input type="text" id="username" name="username" placeholder="" class="input-xlarge">
 							</div>
-							<div class="control-group">
-								<!-- Username -->
-								<label class="control-label"  for="username">Benutzername</label>
-								<div class="controls">
-									<input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-								</div>
+						</div>
+						<div class="control-group">
+							<!-- E-mail -->
+							<label class="control-label" for="email">E-Mail</label>
+							<div class="controls">
+								<input type="text" id="email" name="email" placeholder="" class="input-xlarge">
 							</div>
-							<div class="control-group">
-								<!-- E-mail -->
-								<label class="control-label" for="email">E-Mail</label>
-								<div class="controls">
-									<input type="text" id="email" name="email" placeholder="" class="input-xlarge">
-								</div>
+						</div>
+						<div class="control-group">
+							<!-- Password-->
+							<label class="control-label" for="password">Passwort</label>
+							<div class="controls">
+								<input type="password" id="password" name="password" placeholder="" class="input-xlarge">
 							</div>
-							<div class="control-group">
-								<!-- Password-->
-								<label class="control-label" for="password">Passwort</label>
-								<div class="controls">
-									<input type="password" id="password" name="password" placeholder="" class="input-xlarge">
-								</div>
+						</div>
+						<div class="control-group">
+							<!-- Password -->
+							<label class="control-label"  for="password_confirm">Passwort wiederholen</label>
+							<div class="controls">
+								<input type="password" id="passwordwdh" name="password_confirm" placeholder="" class="input-xlarge">
 							</div>
-							<div class="control-group">
-								<!-- Password -->
-								<label class="control-label"  for="password_confirm">Passwort wiederholen</label>
-								<div class="controls">
-									<input type="password" id="passwordwdh" name="password_confirm" placeholder="" class="input-xlarge">
-								</div>
+						</div>
+						<div class="control-group">
+							<input type="checkbox" id="agb" value="agb">AGB's akzeptieren
+						</div>
+
+						{{> reCAPTCHA}}
+
+						<div class="control-group">
+							<!-- Button -->
+							<div class="controls">
+								<button class="btn btn-success" type="submit" id="registrierButton">Registrieren</button>
 							</div>
-<<<<<<< HEAD
-							<div class="control-group">
-								<input type="checkbox" id="agb" value="agb">AGB's akzeptieren
-							</div>
-							
-							{{> reCAPTCHA}}
-=======
-							
-								{{> reCAPTCHA}}
->>>>>>> origin/master
-							
-							<div class="control-group">
-								<!-- Button -->
-								<div class="controls">
-									<button class="btn btn-success" type="submit" id="registrierButton">Registrieren</button>
-<<<<<<< HEAD
-								</div>
-							</div>
-						</fieldset>
-					</form>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="routen">
+	<div class="container-fluid">
+		<div class="nav-cont sidebar-routen routen-bg">
+			<ul class="nav nav-sidebar">
+				<li class="sidebar-brand">
+					<a href="#">
+						<center>Routen</center>
+					</a>
+				</li>
+				<form class="navbar-form">
+					<div class="form-group">
+						<input type="text"  placeholder="Routenname" id="routeninput" class="routeninput suchen-feld">
+						<button type="button" class="btn btn-default" aria-label="Suchen">
+							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						</button>
+					</div>
+				</form>
+				<div id="routenAusgabe">
+					{{#each route}}
+					<p><a href="#" id="aktRout">{{name}}</a></p>
+					{{/each}}
+				</div>
+			</ul>
+		</div>
+		<div class="row">
+			<div class="col-md-7 col-sm-offset-1">
+				<div id="routenInfo" class="jumbotron jumbotron-bg ">
+					<center>
+						<h1>Routen</h1>
+					</center>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-8 col-sm-offset-3">
+				<center>
+				<div id="googleeinbindung" class="jumbotron map-jumb">
+					<center>
+						<h1>Karte </h1>
+					</center>
+				</div>
+			</center>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="vorschlag">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="nav-cont sidebar-routen routen-bg">
+				<ul class="nav nav-sidebar">
+					<li class="sidebar-brand">
+						<a href="#">
+							<center>Routen</center>
+						</a>
+					</li>
+					<form class="navbar-form">
+						<div class="form-group">
+							<input type="text" class="suchen-feld" placeholder="Routenname">
+						</div>
+						<button type="button" class="btn btn-default" aria-label="Suchen">
+							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						</button>
+					</form>
+				</ul>
+			</div>
+			<div class="col-md-8 col-md-offset-1">
+				<div class="jumbotron jumbotron-bg">
+					<center>
+						<h1>Routen</h1>
+						<p>Hier wird die augewählte Route angezeigt</p>
+					</center>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar-suche einstellungen-bg">
+				<ul class="nav sidebar-nav">
+					<li class="sidebar-brand">
+						<center>
+							<h2>Einstellungen</h2>
+						</center>
+					</li>
+					<form class="navbar-form">
+						<div class="form-group">
+							<label for="anz" class="control-label">Anzahl</label>
+							<input type="text" class="form-control input-sm" name="anz" placeholder="Anzahl">
+						</div>
+						<div class="form-group">
+							<label for="ent" class="control-label">Entfernung</label>
+							<input type="text" class="form-control input-sm" name="ent" placeholder="Entfernung">
+						</div>
+					</form>
+				</ul>
+			</div>
+			<div class="col-md-8 col-md-offset-1">
+				<div class="jumbotron">
+					<center>
+						<h1>Karte </h1>
+						<p>Hier wird die Google Maps Karte eingeblendet</p>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <template name="profil">
-		<div class="container-fluid">
-			<div class="row row-centered">
-				<div class="col-md-5 col-centered profil-bg">
-					<form class="form-horizontal" action='' method="POST">
-						<fieldset>
-							<div id="legend">
-								<legend class="">Profil</legend>
+	<div class="container-fluid">
+		<div class="row row-centered">
+			<div class="col-md-5 col-centered profil-bg">
+				<form class="form-horizontal" action='' method="POST">
+					<fieldset>
+						<div id="legend">
+							<legend class="">Profil</legend>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="pro_username">Benutzername</label>
+							<div class="controls">
+								<input type="text" id="pro_username" name="username" placeholder="{{currentUser.username}}" class="input-xlarge">
+								<button class="btn btn-success" type="submit" id="profiluserButton">Aktualisieren</button>
 							</div>
-							<div class="control-group">
-								<label class="control-label" for="pro_username">Benutzername</label>
-								<div class="controls">
-									<input type="text" id="pro_username" name="username" placeholder="{{currentUser.username}}" class="input-xlarge">
-									<button class="btn btn-success" type="submit" id="profiluserButton">Aktualisieren</button>
-								</div>
-								
+
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="pro_email">E-Mail</label>
+							<div class="controls">
+								<input type="text" id="pro_email" name="email" placeholder="{{currentUser.email}}" class="input-xlarge">
+								<button class="btn btn-success" type="submit" id="profilemailButton">Aktualisieren</button>
 							</div>
-							<div class="control-group">
-								<label class="control-label" for="pro_email">E-Mail</label>
-								<div class="controls">
-									<input type="text" id="pro_email" name="email" placeholder="{{currentUser.email}}" class="input-xlarge">
-									<button class="btn btn-success" type="submit" id="profilemailButton">Aktualisieren</button>
-								</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="pro_altpassword">Altes Passwort</label>
+							<div class="controls">
+								<input type="password" id="pro_altpassword" name="password" class="input-xlarge">
 							</div>
-							<div class="control-group">
-								<label class="control-label" for="pro_password">Passwort</label>
-								<div class="controls">
-									<input type="password" id="pro_password" name="password" class="input-xlarge">
-								</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="pro_neupassword">Neues Passwort</label>
+							<div class="controls">
+								<input type="password" id="pro_neupassword" name="password" class="input-xlarge">
 							</div>
-							<div class="control-group">
-								<label class="control-label" for="pro_password">Passwort wiederholen</label>
-								<div class="controls">
-									<input type="password" id="pro_passwordwdh" name="password" class="input-xlarge">
-									<button class="btn btn-success" type="submit" id="profilpassworButton">Aktualisieren</button>
-=======
->>>>>>> origin/master
-								</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="pro_passwordwdh">Passwort wiederholen</label>
+							<div class="controls">
+								<input type="password" id="pro_passwordwdh" name="password" class="input-xlarge">
+								<button class="btn btn-success" type="submit" id="profilpassworButton">Aktualisieren</button>
 							</div>
-						</fieldset>
-					</form>
-				</div>
+						</div>
+					</fieldset>
+				</form>
 			</div>
 		</div>
+	</div>
 </template>

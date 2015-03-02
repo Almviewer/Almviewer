@@ -8,9 +8,43 @@
     display: none;
 }
 
+/*.routen-jumb{
+  margin-left: 60px;
+}*/
+
+.map-jumb{
+  margin-top: 5px;
+}
+
+#routenAusgabe{
+  color: #000;
+  margin-left: 19px;
+}
+
+#routeninfo > h2 , h4{
+color: #f00;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-size: 25px;
+
+}
+
+#routeninfo > h4 , h2{
+color: #ffffff;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.nav-cont{
+  
+  max-width: 400px;
+  min-width: 250px;
+  position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+    float: left;
+}
+
 @media (min-width: 768px) {
   .sidebar-routen {
-    height: 50%;
     margin-left: 10px;
     z-index: 1000;
     display: block;
@@ -62,4 +96,8 @@
 .sidebar-nav > .sidebar-brand a:hover {
     color: #fff;
     background: none;
+}
+
+.map-centered {
+    margin: auto;
 }
