@@ -1,0 +1,14 @@
+/* this is only to style the sidebar - you can make the sidebar look any way you want */
+.sidebar {
+  padding: 10px;
+  padding-left: 50px;
+}
+
+.main{
+	color: #fff;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.routenklasse{
+	overflow: auto;
+}

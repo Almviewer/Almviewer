@@ -1,103 +1,162 @@
-.sidebar-routen {
-    color: #fff;
-  display: none;
-}
-
-.sidebar-suche{
-    color: #fff;
-    display: none;
-}
-
-/*.routen-jumb{
-  margin-left: 60px;
-}*/
-
-.map-jumb{
-  margin-top: 5px;
-}
-
-#routenAusgabe{
-  color: #000;
-  margin-left: 19px;
-}
-
-#routeninfo > h2 , h4{
-color: #f00;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  font-size: 25px;
-
-}
-
-#routeninfo > h4 , h2{
-color: #ffffff;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-
-.nav-cont{
-  
-  max-width: 400px;
-  min-width: 250px;
-  position: relative;
-    padding-left: 15px;
-    padding-right: 15px;
+/* All the default sidebar styles */
+/* toggle button settings */
+/* Note: this disables the navbar-toggle class's hide function. set visibility with the boostrap visible/hidden classes */
+/* Note: this also disables the navbar-header class positioning settings in small screens. */
+.navbar.navbar-static .navbar-header {
     float: left;
 }
 
+.navbar .navbar-toggle.toggle-left {
+    float: left;
+    margin-left: 15px;
+}
+
+.navbar .navbar-toggle.toggle-right {
+    float: right;
+    margin-right: 15px;
+}
+
+.navbar .navbar-toggle.toggle-sidebar, [data-toggle="sidebar"] {
+    display: block;
+}
+
+/* sidebar settings */
+.sidebar {
+    position: absolute;
+    display: block;
+    top: 120px;
+    z-index: 1000;
+    min-height: 50%;
+    max-height: none;
+    overflow: auto;
+}
+
+.sidebar-left {
+    left: 0;
+}
+
+.sidebar-right {
+    right: 0;
+}
+
+/* css to override hiding the sidebar according to different screen sizes */
+.row .sidebar.sidebar-left.sidebar-xs-show {
+    left: 0;
+    -webkit-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    -o-transform: translate(0,0);
+    -moz-transform: translate(0,0);
+    transform: translate(0,0);
+}
+
+/*right sidebar is untested */
+.row .sidebar.sidebar-right.sidebar-xs-show {
+    right: 0;
+    -webkit-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    -o-transform: translate(0,0);
+    -moz-transform: translate(0,0);
+    transform: translate(0,0);
+}
+
 @media (min-width: 768px) {
-  .sidebar-routen {
-    margin-left: 10px;
-    z-index: 1000;
-    display: block;
-    padding: 5px;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #000;    
-  }
+    .row .sidebar.sidebar-left.sidebar-sm-show {
+        left: 0;
+        -webkit-transform: translate(0,0);
+        -ms-transform: translate(0,0);
+        -o-transform: translate(0,0);
+        -moz-transform: translate(0,0);
+        transform: translate(0,0);
+    }
 
-  .sidebar-suche {
-    margin-top: 10px;
-    height: 30%;
-    margin-left: 10px;
-    z-index: 1000;
-    display: block;
-    padding: 5px;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #000;
-  }
+    /*right sidebar is untested */
+    .row .sidebar.sidebar-right.sidebar-sm-show {
+        right: 0;
+        -webkit-transform: translate(0,0);
+        -ms-transform: translate(0,0);
+        -o-transform: translate(0,0);
+        -moz-transform: translate(0,0);
+        transform: translate(0,0);
+    }
 }
 
-/* Sidebar navigation */
-.nav-sidebar {
-  margin-right: -20px; /* 20px padding + 1px border */
-  margin-bottom: 20px;
-  margin-left: -20px;
-  padding-left: 10px;
+@media (min-width: 992px) {
+    .row .sidebar.sidebar-left.sidebar-md-show {
+        left: 0;
+        -webkit-transform: translate(0,0);
+        -ms-transform: translate(0,0);
+        -o-transform: translate(0,0);
+        -moz-transform: translate(0,0);
+        transform: translate(0,0);
+    }
+
+    .row .sidebar.sidebar-right.sidebar-md-show {
+        right: 0;
+        -webkit-transform: translate(0,0);
+        -ms-transform: translate(0,0);
+        -o-transform: translate(0,0);
+        -moz-transform: translate(0,0);
+        transform: translate(0,0);
+    }
 }
 
-.nav-sidebar > li > a {
-  padding-right: 20px;
-  padding-left: 20px;
-}
-.nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
-  color: #fff;
-  background-color: #428bca;
+@media (min-width: 1170px) {
+    .row .sidebar.sidebar-left.sidebar-lg-show {
+        left: 0;
+        -webkit-transform: translate(0,0);
+        -moz-transform: translate(0,0);
+        -ms-transform: translate(0,0);
+        -o-transform: translate(0,0);
+        transform: translate(0,0);
+    }
+
+    .row .sidebar.sidebar-right.sidebar-lg-show {
+        right: 0;
+        -webkit-transform: translate(0,0);
+        -moz-transform: translate(0,0);
+        -ms-transform: translate(0,0);
+        -o-transform: translate(0,0);
+        transform: translate(0,0);
+    }
 }
 
-.nav-sidebar > .sidebar-brand a {
-    color: #000;
-    font-size: 20pt;
-    font-family: "Matura MT Script Capitals";
-
+/* animation class - optional: without it the sidebar would just pop in and out*/
+.sidebar-animate {
+    -webkit-transition: -webkit-transform 300ms ease;
+    -moz-transition: -moz-transform 300ms ease;
+    -o-transition: transform 300ms ease;
+    transition: transform 300ms ease;
 }
 
-.sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
-    background: none;
+/* Left panel positioning classes */
+.sidebar.sidebar-left {
+    -webkit-transform: translate(-100%,0);
+    -moz-transform: translate(-100%,0);
+    -ms-transform: translate(-100%,0);
+    -o-transform: translate(-100%,0);
+    transform: translate(-100%,0);
 }
 
-.map-centered {
-    margin: auto;
+    .sidebar.sidebar-left.sidebar-open {
+        -webkit-transform: translate(0,0);
+        -moz-transform: translate(0,0);
+        -ms-transform: translate(0,0);
+        -o-transform: translate(0,0);
+        transform: translate(0,0);
+    }
+
+.sidebar.sidebar-right {
+    -webkit-transform: translate(100%,0);
+    -moz-transform: translate(100%,0);
+    -ms-transform: translate(100%,0);
+    -o-transform: translate(100%,0);
+    transform: translate(100%,0);
 }
+
+    .sidebar.sidebar-right.sidebar-open {
+        -webkit-transform: translate(0,0);
+        -moz-transform: translate(0,0);
+        -ms-transform: translate(0,0);
+        -o-transform: translate(0,0);
+        transform: translate(0,0);
+    }

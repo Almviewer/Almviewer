@@ -1,35 +1,147 @@
-﻿<div id="skywalk">
-    <h2>Skywalk Klettersteig</h2>
-    <h4>Schwierigkeit: 2,3</h4>
-<h4>Charakter:</h4>
-     <p>„Sky Walk“ heißt übersetzt „Himmelsweg“ und selten ist man bei einem Klettersteig dem Himmel so nahe wie hier! Extrem ausgesetzt verläuft der Steig durch die überhängenden Steilabbrüche des Hunerkogels, gute Rastpositionen sucht man in dieser Steiganlage vergebens. Der Steig gehört zu den schwersten Steiganlagen der Ostalpen. Bei einer Begehung ist - neben einer gehörigen Portion Mut - vor allem ausdauernde Armkraft gefragt! Das Finale des Sky Walk Klettersteiges ist ein sehr luftiger, leicht überhängender Pfeiler im Mittelteil der Wand. Aber auch schon der Einstiegspfeiler und die Plattenquerung haben es in sich. Unter der Regie von Karl Höflehner wurde im Juni/Juli 2006 von Hans Prugger und Alex Seebacher ein gelungenes Klettersteig-Testpiece geschaffen, das man an Steilheit kaum überbieten kann! Klettersteig-Neulinge oder nicht ganz so kräftige Bergsteiger sollten die Finger von diesem Eisenweg lassen – sonst kommen sie dem Himmel vielleicht näher als ihnen lieb ist.</p>
-<h4>Genaue Routenbeschreibung: </h4>
-<p>Von der Abzweigung des Hunerscharten-Klettersteiges (B) zuerst leicht (A), dann etwas schwerer (B/C) auf einer Art Band bis zum ersten steilen Pfeiler leicht absteigend queren. Dort sehr steil (D) aufwärts und am Schluss in leicht überhängender Kletterei (C/D) zu dessen Ende. Es folgt eine Plattenquerung (D), die in einer mit einem Riss durchzogenen Steilwand mündet (D). Am Plattenende quert man kurz zum Pfeiler und klettert extrem ausgesetzt höher (anhaltend D/E) bis man oben erneut zu einer kurzen Linksquerung (D) kommt. Steil aufwärts in die Schlusswand (D), die erneut in eine leichter werdende Querung (C) mündet. Am Ende über einen Grat (B) in flaches Gelände vor der Absperrung. Über den Zaun und rechts hinauf zur Sky Walk Plattform.</p>
-<h4>Anreise/Zufahrt: </h4> 
- <p>Über die A 10 und Radstadt bzw. durch das Ennstal nach Schladming. Von dort in die Ramsau hinauf fahren. Westlich des Ortes führt die Mautstraße (Auffahrt mit Seilbahn-Fahrkarte gratis) zur Dachstein-Gletscherbahn (Parkplatz).</p>
-<p>Öffis: Mit der Bahn nach Schladming und von dort mit dem Bus (Linie 960) bis Dachstein / Türlwandhütte.
-</p>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset=utf-8>
+<meta name="viewport" content="width=620">
+<title>Geolocation</title>
+<link rel="stylesheet" href="css/html5demos.css">
+<script src="js/h5utils.js"></script></head>
+<body>
+<section id="wrapper">
+<div id="carbonads-container"><div class="carbonad"><div id="azcarbon"></div><script type="text/javascript">var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = "http://engine.carbonads.com/z/14060/azcarbon_2_1_0_VERT"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script></div></div>
+    <header>
 
-<h4>Zustieg zur Wand:</h4>
+    </header>
+<meta name="viewport" content="width=620" />
 
-<p>Mit der Dachstein-Gletscherbahn zur Bergstation und von der Bergstation über einen kurzen Klettersteig (Abstiegsklettersteig, C/D, der Steig beginnt im Bereich des Aufganges zur Talfahrt, rot-weiß-rote Markierung) hinunter zu Hunerscharte (unter der Materialseilbahn) und über den neu sanierten Hunerscharten-Klettersteig bis zur Abzweigung des Sky Walk-Klettersteiges (Tafel).
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <article>
+      <p>Finding your location: <span id="status">checking...</span></p>
+    </article>
+<script>
+function deg2rad(angle) {
+  //  discuss at: http://phpjs.org/functions/deg2rad/
+  // original by: Enrique Gonzalez
+  // improved by: Thomas Grainger (http://graingert.co.uk)
+  //   example 1: deg2rad(45);
+  //   returns 1: 0.7853981633974483
 
-In die Hunerscharte kann man auch in einem Bogen über den Gletscher zusteigen.
+  return angle * .017453292519943295; // (angle / 180) * Math.PI;
+}
 
-Beim Zustieg von der Türlwandhütte verlängert sich die Zustiegszeit um etwa 2:00 Stunden.</p>
+function vincentyGreatCircleDistance(
+  latitudeFrom, longitudeFrom, latitudeTo, longitudeTo)
+{
+  // convert from degrees to radians
+var earthRadius = 6371000;
+var  latFrom = deg2rad(latitudeFrom);
+  var lonFrom = deg2rad(longitudeFrom);
+  var latTo = deg2rad(latitudeTo);
+  var lonTo = deg2rad(longitudeTo);
 
-<h4>Zus&auml;tzliche Informationen:</h4>
-<p>Höhe Einstieg: 
-2565 m</p>
-<p>Abstieg: 
+var  lonDelta = lonTo - lonFrom;
+  var a = Math.pow(Math.cos(latTo) * Math.sin(lonDelta), 2) +
+    Math.pow(Math.cos(latFrom) * Math.sin(latTo) - Math.sin(latFrom) * Math.cos(latTo) * Math.cos(lonDelta), 2);
+  var b = Math.sin(latFrom) * Math.sin(latTo) + Math.cos(latFrom) * Math.cos(latTo) * Math.cos(lonDelta);
 
-Mit wenige Schritten zurück zum Sky Walk bei der Bergstation der Dachstein-Gletscherbahn.
+  var angle = Math.atan2(Math.sqrt(a), b);
+  return angle * earthRadius;
+}
 
-Beim Abstieg zur Türlwandhütte verlängert sich die Abstiegszeit um etwa 1:40 Stunden.</p>
-<p>Beste Jahreszeit: 
-Juni, Juli, August, September, Oktober</p>
-<p><img src="./bilder/skywalk.jpg""></p>
+function success(position) {
+  var s = document.querySelector('#status');
+  
+  if (s.className == 'success') {
+    // not sure why we're hitting this twice in FF, I think it's to do with a cached result coming back    
+    return;
+  }
+  
+  s.innerHTML = "found you!";
+  s.className = 'success';
+  
+  var mapcanvas = document.createElement('div');
+  mapcanvas.id = 'mapcanvas';
+  mapcanvas.style.height = '400px';
+  mapcanvas.style.width = '560px';
+    
+  document.querySelector('article').appendChild(mapcanvas);
+  
+  var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  var myOptions = {
+    zoom: 8,
+    center: latlng,
+    mapTypeControl: false,
+    navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+  
+  var marker = new google.maps.Marker({
+      position: latlng, 
+      map: map, 
+      title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
+  });
 
- <input type="button" value="Als PDF downloaden" onclick="window.open('./pdf/Skywalk_Topo.pdf')"></input>
 
-</div>
+
+
+
+
+var latlng2 = new google.maps.LatLng(47.451005, 13.617569);
+  var marker2 = new google.maps.Marker({
+      position: latlng2, 
+      map: map, 
+      title:"Skywalk"
+  });
+var latlng3 = new google.maps.LatLng(47.450947, 13.617912);
+  var marker3 = new google.maps.Marker({
+      position: latlng3, 
+      map: map, 
+      title:"Irg Klettersteig"
+  });
+var latlng4 = new google.maps.LatLng(47.450744, 13.617569);
+  var marker4 = new google.maps.Marker({
+      position: latlng4, 
+      map: map, 
+      title:"Der Johann"
+  });
+var latlng5 = new google.maps.LatLng(47.587790, 14.669024);
+  var marker5 = new google.maps.Marker({
+      position: latlng5, 
+      map: map, 
+      title:"Wasserfallweg"
+  });
+
+}
+
+function error(msg) {
+  var s = document.querySelector('#status');
+  s.innerHTML = typeof msg == 'string' ? msg : "failed";
+  s.className = 'fail';
+  
+  // console.log(arguments);
+}
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(success, error);
+} else {
+  error('not supported');
+}
+
+</script><a id="html5badge" href="http://www.w3.org/html/logo/">
+
+</a>
+    
+</section>
+<script src="js/prettify.packed.js"></script>
+<script>
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script>
+try {
+var pageTracker = _gat._getTracker("UA-1656750-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

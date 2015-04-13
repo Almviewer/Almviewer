@@ -1,5 +1,6 @@
 .login-design{
 	background-image: url("/login_new.png"); 
+	padding-bottom: 10px;
 }
 
 .jumbotron-bg{
@@ -19,7 +20,9 @@
 
 .routen-bg{
 	background-image: url("/bg-zettel.png");
-	background-size: 101%;
+  	
+  	/*background-position   : 50% 50%;     /* or: center center */
+  	background-size       : 101%;       /* CSS3 */
 }
 
 .einstellungen-bg{
@@ -35,6 +38,10 @@
 
 input{
 	color:#000;
+}
+
+.routenklasse{
+	overflow: auto;
 }
 
 .row-centered {

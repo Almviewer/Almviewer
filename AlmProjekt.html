@@ -2,22 +2,27 @@
 	<title>Almviewer</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
 	<link rel="stylesheet" href="client/css/bootstrap.css" type="text/css">
+	<link rel="stylesheet" href="client/css/style.css" type="text/css">
+	<link rel="stylesheet" href="client//css/sidebar.css" type="text/css">
 	<link rel="stylesheet" href="Almviewer.css" type="text/css">
-	<link rel="stylesheet" href="client/css/rateit.css" type="text/css">
 </head>
 
 <body>
 	{{>navigation}}
-	<script src="client/js/jquery-1.11.1.min.js"></script>
+	<script src="client/js/jquery-1.11.2.min.js"></script>
 	<script src="client/js/bootstrap.js"></script>
-	<script src="client/js/zusatz.js"></script>
-	<script src="client/jquery.rateit.min.js"></script>
+	<script src="client/js/sidebar.js"></script>
 </body>
 
 <template name="navigation">
 	<div class="navbar navbar-inverse navbar-static-top navbar-bg">
 		<div class="container-fluid">
 			<div class="navbar-header">
+				<button type="button" class="navbar-toggle toggle-left hidden-md hidden-lg" data-toggle="sidebar" data-target=".sidebar-left">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
 				<a href="Startseite.html" class="navbar-brand"><img style="max-width:120px;" alt="Almviewer" src="header_logo2.png"></a>
 				<button class="navbar-toggle" data-toggle="collapse" data-target = ".navHeaderCollapse">
 					<span class="icon-bar"></span>
@@ -38,20 +43,20 @@
 
 <template name="nav_loggedout">
 	<ul class="nav navbar-nav navbar-right">
-		<li class="active"><a href="/">Startseite</a></li>
-		<li><a href="/routen">Routen</a></li>
-		<li><a href="/registration">Registrierung</a></li>
-		<li><a href="/impressum">Impressum</a></li>
+		<li class="active" id="navStart"><a href="/">Startseite</a></li>
+		<li id="navRout"><a href="/routen">Routen</a></li>
+		<li id="navReg"><a href="/registration">Registrierung</a></li>
+		<li id="navImp"><a href="/impressum">Impressum</a></li>
 	</ul>
 </template>
 
 <template name="nav_loggedin">
 	<ul class="nav navbar-nav navbar-right">
-		<li class="active"><a href="/">Startseite</a></li>
+		<li class="active" id=" "><a href="/">Startseite</a></li>
 		<li>{{>logout}}</li>
-		<li><a href="/vorschlag">Vorschlag</a></li>
-		<li><a href="/impressum">Impressum</a></li>
-		<li><a href="/profil">{{currentUser.username}}</a></li>
+		<li id="navVor"><a href="/vorschlag">Vorschlag</a></li>
+		<li id="navImp"><a href="/impressum">Impressum</a></li>
+		<li id="navProf"><a href="/profil">{{currentUser.username}}</a></li>
 	</ul>
 </template>
 
@@ -63,7 +68,8 @@
 	<div class="jumbotron jumbotron-bg">
 		<center>
 			<h1>Startseite</h1>
-			<p>Hier werden Informationen zur Website angezeigt</p>
+			<p>Wilkommen auf <b>Almviewer</b>!</p>
+			<p>Als Gast kannst du dir verschiedene Kletterrouten und deren Informationen anzeigen lasse. Wenn du dich anmeldest, kannst du dir auch anzeigen lassen, welche Routen du entsprechend deiner Fähigkeiten, nehmen solltest.</p>
 		</center>
 	</div>
 </template>
@@ -71,13 +77,14 @@
 <template name="start_loggedout">
 	<div class="jumbotron jumbotron-bg">
 		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
+			<div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-2">
 				<center>
 					<h1>Startseite</h1>
-					<p>Hier werden Informationen zur Website angezeigt</p>
+					<p>Wilkommen auf <b>Almviewer</b>!</p>
+					<p>Als Gast kannst du dir verschiedene Kletterrouten und deren Informationen anzeigen lassen. Wenn du dich anmeldest, kannst du dir auch anzeigen lassen, welche Routen du entsprechend deiner Fähigkeiten, nehmen solltest.</p>
 				</center>
 			</div>
-			<div class="col-md-3 pull-right login-design">
+			<div class="col-md-3 col-sm-3 col-xs-6 login-design">
 				{{>login}}
 			</div>
 		</div>
@@ -111,10 +118,6 @@
 		</div>
 
 		<button type="submit" id="loginButton" class="btn btn-success btn-block">Login</button>
-		<a href="#" class="btn btn-default btn-block">Passwort vergessen</a>
-		<div class="checkbox">
-			<label><input type="checkbox" name="remember" id="remember"> Angemeldet bleiben</label>
-		</div>
 	</form>
 </template>
 
@@ -176,46 +179,36 @@
 
 <template name="routen">
 	<div class="container-fluid">
-		<div class="nav-cont sidebar-routen routen-bg">
-			<ul class="nav nav-sidebar">
-				<li class="sidebar-brand">
-					<a href="#">
-						<center>Routen</center>
-					</a>
-				</li>
-				<form class="navbar-form">
-					<div class="form-group">
-						<input type="text"  placeholder="Routenname" id="routeninput" class="routeninput suchen-feld">
-						<button type="button" class="btn btn-default" aria-label="Suchen">
-							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-						</button>
+		<div class="row">
+			<div class="col-xs-7 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate sidebar-md-show routen-bg">
+				<ul class="nav navbar-stacked">
+					<li class="sidebar-brand">
+						<a href="#">
+							<center>Routen</center>
+						</a>
+					</li>
+					<form class="navbar-form">
+						<div class="form-group">
+							<input type="text"  placeholder="Routenname" id="routeninput" class="routeninput input-sm">
+						</div>
+					</form>
+					<div id="routenAusgabe">
+						{{#each route}}
+						<p><a href="#" id="aktRout">{{name}}</a></p>
+						{{/each}}
 					</div>
-				</form>
-				<div id="routenAusgabe">
-					{{#each route}}
-					<p><a href="#" id="aktRout">{{name}}</a></p>
-					{{/each}}
-				</div>
-			</ul>
-		</div>
-		<div class="row">
-			<div class="col-md-7 col-sm-offset-1">
-				<div id="routenInfo" class="jumbotron jumbotron-bg ">
-					<center>
-						<h1>Routen</h1>
-					</center>
-				</div>
+				</ul>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-8 col-sm-offset-3">
+			<div id="routenInfo" class="main col-md-6 col-md-offset-4 jumbotron-bg routenklasse">
 				<center>
-				<div id="googleeinbindung" class="jumbotron map-jumb">
-					<center>
-						<h1>Karte </h1>
-					</center>
-				</div>
-			</center>
+					<h1>Routen</h1>
+				</center>
+			</div>
+
+			<div class="main col-md-6 col-md-offset-4 jumbotron-bg googleeinbindung">
+				<center>
+					<h1>Karte </h1>
+				</center>
 			</div>
 		</div>
 	</div>
@@ -224,34 +217,24 @@
 <template name="vorschlag">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="nav-cont sidebar-routen routen-bg">
-				<ul class="nav nav-sidebar">
-					<li class="sidebar-brand">
+			<div class="col-xs-7 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate sidebar-md-show routen-bg">
+				<ul class="nav nav-stacked">
+					<li class="">
 						<a href="#">
 							<center>Routen</center>
 						</a>
 					</li>
 					<form class="navbar-form">
 						<div class="form-group">
-							<input type="text" class="suchen-feld" placeholder="Routenname">
+							<input type="text" id="routeninput" class="routeninput input-sm" placeholder="Routenname">
 						</div>
-						<button type="button" class="btn btn-default" aria-label="Suchen">
-							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-						</button>
 					</form>
+					<div id="routenAusgabe">
+						{{#each route}}
+						<p><a href="#" id="aktRout">{{name}}</a></p>
+						{{/each}}
+					</div>
 				</ul>
-			</div>
-			<div class="col-md-8 col-md-offset-1">
-				<div class="jumbotron jumbotron-bg">
-					<center>
-						<h1>Routen</h1>
-						<p>Hier wird die augewählte Route angezeigt</p>
-					</center>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar-suche einstellungen-bg">
 				<ul class="nav sidebar-nav">
 					<li class="sidebar-brand">
 						<center>
@@ -259,25 +242,54 @@
 						</center>
 					</li>
 					<form class="navbar-form">
-						<div class="form-group">
-							<label for="anz" class="control-label">Anzahl</label>
-							<input type="text" class="form-control input-sm" name="anz" placeholder="Anzahl">
-						</div>
-						<div class="form-group">
-							<label for="ent" class="control-label">Entfernung</label>
-							<input type="text" class="form-control input-sm" name="ent" placeholder="Entfernung">
-						</div>
+						{{> routenvorschlag}}
 					</form>
 				</ul>
 			</div>
-			<div class="col-md-8 col-md-offset-1">
-				<div class="jumbotron">
+			<div id="routenInfo" class="main col-md-6 col-md-offset-4 jumbotron-bg">
+				<div class="jumbotron jumbotron-bg">
 					<center>
-						<h1>Karte </h1>
-						<p>Hier wird die Google Maps Karte eingeblendet</p>
+						<h1>Routen</h1>
+						<p>Hier wird die augewählte Route angezeigt</p>
+						<a href="/finderouten2.html">Routen in der Nähe</a>
 					</center>
 				</div>
 			</div>
+		</div>
+		<div class="row">
+			<div class="main col-md-6 col-md-offset-4 jumbotron-bg googleeinbindung">
+				<center>
+					<h1>Karte </h1>
+				</center>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="routenvorschlag">
+	<p>Routenanzahl auswählen:</p>
+	<select id="auswahl_routenAnz">
+		<option value="1" selected="selected">1</option>
+		<option value="2"> 2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+	</select>
+	<div id="ausgabe_vorschlag">
+		<p>Empfohlene Routen:</p>
+		{{#each routenV}}
+		<p><a href="#" id="vorschlagRout">{{name}}, Schwierigkeitsgrad: {{schwierigkeitsgrad}}</a></p>
+		{{/each}}
+	</div>
+</template>
+
+<template name="impressum">
+	<div class="container-fluid">
+		<div class="jumbotron">
+			<p>Teamleiter (Management): David Zellhofer</p>
+			<p>Teammitglied (Design): Martin Hammerbacher</p>
+			<p>Teammitglied (Front-End): Bernhard Mayrhofer</p>
+			<p>Teammitglied (Back-End): Christian Schlatte</p>
 		</div>
 	</div>
 </template>
@@ -302,11 +314,11 @@
 						<div class="control-group">
 							<label class="control-label" for="pro_email">E-Mail</label>
 							<div class="controls">
-								<input type="text" id="pro_email" name="email" placeholder="{{currentUser.email}}" class="input-xlarge">
+								<input type="text" id="pro_email" name="email" class="input-xlarge" placeholder="{{currentEmail}}">
 								<button class="btn btn-success" type="submit" id="profilemailButton">Aktualisieren</button>
 							</div>
 						</div>
-						<div class="control-group">
+						<!--<div class="control-group">
 							<label class="control-label" for="pro_altpassword">Altes Passwort</label>
 							<div class="controls">
 								<input type="password" id="pro_altpassword" name="password" class="input-xlarge">
@@ -324,7 +336,7 @@
 								<input type="password" id="pro_passwordwdh" name="password" class="input-xlarge">
 								<button class="btn btn-success" type="submit" id="profilpassworButton">Aktualisieren</button>
 							</div>
-						</div>
+						</div> -->
 					</fieldset>
 				</form>
 			</div>

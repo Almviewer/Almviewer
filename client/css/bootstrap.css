@@ -3659,7 +3659,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
+  /*background-color: #eeeeee;*/
 }
 .nav > li.disabled > a {
   color: #777777;
@@ -4292,6 +4292,8 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
   color: #ffffff;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
   background-color: transparent;
 }
 .navbar-inverse .navbar-nav > .active > a,
